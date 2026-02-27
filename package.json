@@ -10,25 +10,21 @@
     "format": "biome format --write"
   },
   "dependencies": {
-    "clsx": "^2.1.1",
-    "crypto-js": "^4.2.0",
-    "date-fns": "^4.1.0",
     "drizzle-kit": "^0.31.9",
     "drizzle-orm": "^0.45.1",
     "lucide-react": "^0.575.0",
     "nanoid": "^5.1.6",
     "next": "16.1.6",
-    "postgres": "^3.4.8",
+    "pg": "^8.19.0",
     "react": "19.2.3",
     "react-dom": "19.2.3",
-    "react-markdown": "^10.1.0",
-    "tailwind-merge": "^3.5.0"
+    "react-markdown": "^10.1.0"
   },
   "devDependencies": {
+    "@types/pg": "^8.16.0",
     "@biomejs/biome": "2.2.0",
     "@tailwindcss/postcss": "^4",
     "@tailwindcss/typography": "^0.5.19",
-    "@types/crypto-js": "^4.2.2",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
