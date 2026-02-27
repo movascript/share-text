@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "biome check",
-    "format": "biome format --write"
+    "format": "biome format --write",
+    "db:up": "docker-compose up -d",
+    "db:down": "docker-compose down"
   },
   "dependencies": {
     "drizzle-kit": "^0.31.9",
