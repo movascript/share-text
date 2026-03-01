@@ -1,34 +1,18 @@
-import {
-  createCipheriv,
-  createDecipheriv,
-  randomBytes,
-  scryptSync,
-} from "node:crypto";
+import AES from "crypto-js/aes";
+import encUtf8 from "crypto-js/enc-utf8";
 
-const ALGORITHM = "aes-256-cbc";
-const IV_LENGTH = 16;
-const SALT_LENGTH = 16;
-const KEY_LENGTH = 32;
+export const encryptData = (text: string, pass?: string): string => {
+  if (!text) return "";
 
-const deriveKey = (pass: string, salt: Buffer): Buffer => {
-  return scryptSync(pass, salt, KEY_LENGTH);
-};
+  if (!pass) return text;
 
-export const encryptData = (text: string, pass: string): string => {
-  if (!text || !pass) return "";
-
-  const salt = randomBytes(SALT_LENGTH);
-  const iv = randomBytes(IV_LENGTH);
-  const key = deriveKey(pass, salt);
-
-  const cipher = createCipheriv("", key, iv);
-  const encrypted = Buffer.concat([
-    cipher.update(text, "utf8"),
-    cipher.final(),
-  ]);
-
-  // Format: salt(16) + iv(16) + ciphertext → base64
-  return Buffer.concat([salt, iv, encrypted]).toString("base64");
+  try {
+    const encrypted = AES.encrypt(text, pass).toString();
+    return encrypted;
+  } catch (e) {
+    console.error("Encryption failed", e);
+    return "";
+  }
 };
 
 export const decryptData = (
@@ -36,22 +20,11 @@ export const decryptData = (
   pass: string,
 ): string | null => {
   try {
-    const data = Buffer.from(ciphertext, "base64");
+    const bytes = AES.decrypt(ciphertext, pass);
+    const originalText = bytes.toString(encUtf8);
 
-    const salt = data.subarray(0, SALT_LENGTH);
-    const iv = data.subarray(SALT_LENGTH, SALT_LENGTH + IV_LENGTH);
-    const encrypted = data.subarray(SALT_LENGTH + IV_LENGTH);
-
-    const key = deriveKey(pass, salt);
-
-    const decipher = createDecipheriv(ALGORITHM, key, iv);
-    const decrypted = Buffer.concat([
-      decipher.update(encrypted),
-      decipher.final(),
-    ]);
-
-    return decrypted.toString("utf8") || null;
+    return originalText || null;
   } catch (_) {
-    return null; // wrong password or corrupted data
+    return null;
   }
 };

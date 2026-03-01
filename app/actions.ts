@@ -6,20 +6,23 @@ import { eq, lt } from "drizzle-orm";
 import { nanoid } from "nanoid";
 import { redirect } from "next/navigation";
 
-export async function createPostAction(formData: FormData) {
-  const encryptedContent = formData.get("encryptedContent") as string;
-  const expiryMode = formData.get("expiryMode") as string; // '1h', '24h', '1w', 'burn', 'forever'
-
-  if (!encryptedContent || encryptedContent.length > 20000) {
+export async function createPostAction(
+  content: string,
+  expiry: string, // "10m" | "1h" | "24h" | "1w" | "1y"
+  encrypted: boolean,
+) {
+  if (!content || content.length > 20000) {
     return { error: "متن نامعتبر یا بیش از حد طولانی است." };
   }
 
   const id = nanoid(8);
-  let expiresAt: Date | null = null;
-  let burnOnRead = false;
-
   const now = new Date();
-  switch (expiryMode) {
+  let expiresAt: Date = new Date(now.getTime() + 10 * 60 * 1000); // default 10m
+
+  switch (expiry) {
+    case "10m":
+      expiresAt = new Date(now.getTime() + 10 * 60 * 1000);
+      break;
     case "1h":
       expiresAt = new Date(now.getTime() + 60 * 60 * 1000);
       break;
@@ -29,20 +32,17 @@ export async function createPostAction(formData: FormData) {
     case "1w":
       expiresAt = new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000);
       break;
-    case "burn":
-      burnOnRead = true;
-      break;
-    case "forever":
-      expiresAt = null;
+    case "1y":
+      expiresAt = new Date(now.getTime() + 365 * 24 * 60 * 60 * 1000);
       break;
   }
 
   try {
     await db.insert(posts).values({
       id,
-      encryptedContent,
+      content,
       expiresAt,
-      burnOnRead,
+      encrypted,
     });
   } catch (error) {
     console.error("Database Error:", error);
@@ -61,13 +61,9 @@ export async function getPostData(id: string) {
 
   if (!post) return null;
 
-  if (post.burnOnRead) {
-    await db.delete(posts).where(eq(posts.id, id));
-  }
-
   return {
-    encryptedContent: post.encryptedContent,
+    content: post.content,
     createdAt: post.createdAt,
-    burnOnRead: post.burnOnRead,
+    encrypted: post.encrypted,
   };
 }
