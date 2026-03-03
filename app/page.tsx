@@ -12,7 +12,7 @@ import Loading from "@/components/Loading";
 export default function Home() {
   const [text, setText] = useState("");
   const [password, setPassword] = useState("");
-  const [expiry, setExpiry] = useState("24h");
+  const [expiry, setExpiry] = useState("1d");
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e: React.SubmitEvent) => {
@@ -32,7 +32,7 @@ export default function Home() {
 
         <form
           onSubmit={handleSubmit}
-          className="bg-white border flex flex-col gap-4 border-gray-200/60 rounded-3xl p-6 md:p-8 shadow-xl shadow-gray-200/40 hover:shadow-2xl hover:shadow-gray-200/60 duration-500"
+          className="bg-white border flex flex-col gap-4 border-gray-200/60 rounded-3xl p-6 md:p-8 duration-500"
         >
           <div className="relative group">
             <textarea
@@ -45,7 +45,7 @@ export default function Home() {
             />
             <div
               dir="ltr"
-              className={`absolute bottom-4 left-4 text-[10px] font-mono text-gray-400 bg-white/70 backdrop-blur px-2 py-1 rounded-md border border-gray-100 shadow-sm ${text.length >= 10000 ? "text-red-300" : ""}`}
+              className={`absolute bottom-4 left-4 text-[10px] font-mono text-gray-400 bg-white/70 backdrop-blur px-2 py-1 rounded-md border border-gray-100 ${text.length >= 10000 ? "text-red-300" : ""}`}
             >
               {text.length} / 10000
             </div>
@@ -89,9 +89,9 @@ export default function Home() {
                 >
                   <option value="10m">۱۰ دقیقه</option>
                   <option value="1h">۱ ساعت</option>
-                  <option value="24h">۲۴ ساعت</option>
+                  <option value="1d">۱ روز</option>
                   <option value="1w">۱ هفته</option>
-                  <option value="1y">۱ سال</option>
+                  <option value="1m">۱ ماه</option>
                 </select>
                 <div className="absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none text-gray-400 text-xs">
                   ▼
@@ -103,7 +103,7 @@ export default function Home() {
           <button
             disabled={loading}
             type="submit"
-            className="w-full group bg-black hover:bg-gray-800 text-white font-medium py-4 px-6 rounded-xl transition-all transform active:scale-[0.99] shadow-lg shadow-gray-300/50 disabled:opacity-70 disabled:cursor-wait flex items-center justify-center gap-3"
+            className="w-full group bg-black hover:bg-gray-800 text-white font-medium py-4 px-6 rounded-xl transition-all transform active:scale-[0.99] disabled:opacity-70 disabled:cursor-wait flex items-center justify-center gap-3"
           >
             {loading ? (
               <Loading />
