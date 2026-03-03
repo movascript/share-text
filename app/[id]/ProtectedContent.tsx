@@ -37,8 +37,8 @@ export default function ProtectedContent({
   }
 
   return (
-    <div className="w-full max-w-md animate-in fade-in slide-in-from-bottom-6 duration-700">
-      <div className="bg-white border border-gray-200 rounded-3xl p-4 md:p-8 shadow-xl shadow-gray-200/40 text-center">
+    <div className="w-full max-w-md duration-700">
+      <div className="bg-white border border-gray-200 rounded-3xl p-4 md:p-8 text-center">
         <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gray-50 mb-6 border border-gray-100">
           <Lock className="w-7 h-7 text-gray-600" />
         </div>

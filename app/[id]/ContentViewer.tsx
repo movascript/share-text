@@ -26,8 +26,8 @@ export default function ContentViewer({
   };
 
   return (
-    <div className="w-full max-w-3xl animate-in fade-in zoom-in-90 duration-500">
-      <div className="bg-white border border-gray-200 rounded-2xl p-6 md:p-10 shadow-sm">
+    <div className="w-full max-w-3xl animate-in fade-in duration-500">
+      <div className="bg-white border border-gray-200 rounded-2xl p-6 md:p-10">
         <div className="flex items-center justify-between mb-6 pb-4 border-b border-gray-100">
           <div className="flex items-center gap-2 text-gray-500">
             <Calendar className="w-4 h-4" />
@@ -36,7 +36,7 @@ export default function ContentViewer({
             </span>
           </div>
           <div className="flex items-center gap-1">
-            <button
+            {/* <button
               type="button"
               onClick={() => alert("NOT IMPLEMENTED YET")}
               className="px-2 py-1 hover:bg-gray-100 rounded-lg transition-colors text-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-200"
@@ -44,7 +44,7 @@ export default function ContentViewer({
               aria-label="نمایش متن خام"
             >
               <span className="text-xs p-0">RAW</span>
-            </button>
+            </button> */}
             <button
               type="button"
               onClick={copyToClipboard}

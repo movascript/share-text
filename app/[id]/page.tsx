@@ -12,7 +12,7 @@ export async function generateMetadata({
   const resolvedParams = await params;
 
   return {
-    title: `متن ${resolvedParams.id}`,
+    title: `متن | ${resolvedParams.id}`,
     description: "مشاهده متن به اشتراک گذاشته شده.",
     robots: { index: false },
   };
@@ -22,12 +22,10 @@ export default async function PostPage({ params }: PageProps<"/[id]">) {
   const resolvedParams = await params;
   const post = await getPostData(resolvedParams.id);
 
-  if (!post) {
-    return notFound();
-  }
+  if (!post) return notFound();
 
   return (
-    <div className="flex gap-8 flex-col items-center justify-center min-h-[80vh] w-full">
+    <div className="flex gap-8 flex-col animate-in fade-in slide-in-from-top-5 items-center justify-center min-h-[80vh] w-full">
       <Header />
 
       {post.encrypted ? (
