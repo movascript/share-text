@@ -7,6 +7,7 @@ import { Lock, Clock, Send } from "lucide-react";
 import DetailsFeatures from "@/components/DetailsFeatures";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
+import Loading from "@/components/Loading";
 
 export default function Home() {
   const [text, setText] = useState("");
@@ -38,7 +39,7 @@ export default function Home() {
               value={text}
               onChange={(e) => setText(e.target.value)}
               placeholder="متن خود را اینجا بنویسید..."
-              className="w-full h-64 bg-gray-50 border border-gray-100 rounded-2xl p-5 text-gray-800 focus:bg-white focus:outline-none focus:ring-2 focus:ring-black/5 focus:border-gray-300 transition-all resize-none placeholder:text-gray-400 leading-8 font-mono text-base"
+              className="w-full h-64 bg-gray-50 border border-gray-100 rounded-2xl p-5 text-gray-800 focus:bg-white focus:outline-none focus:ring-2 focus:ring-black/5 focus:border-gray-300 transition-all resize-none placeholder:text-gray-400 leading-8 text-base"
               maxLength={10000}
               required
             />
@@ -105,11 +106,7 @@ export default function Home() {
             className="w-full group bg-black hover:bg-gray-800 text-white font-medium py-4 px-6 rounded-xl transition-all transform active:scale-[0.99] shadow-lg shadow-gray-300/50 disabled:opacity-70 disabled:cursor-wait flex items-center justify-center gap-3"
           >
             {loading ? (
-              <span className="flex items-center gap-2">
-                <span className="w-1.5 h-1.5 bg-white rounded-full animate-bounce" />
-                <span className="w-1.5 h-1.5 bg-white rounded-full animate-bounce [animation-delay:-.2s]" />
-                <span className="w-1.5 h-1.5 bg-white rounded-full animate-bounce [animation-delay:-.4s]" />
-              </span>
+              <Loading />
             ) : (
               <>
                 <span>ایجاد لینک اشتراک</span>

@@ -1,4 +1,3 @@
-// src/app/[id]/ProtectedContent.tsx
 "use client";
 
 import { useState } from "react";
@@ -19,7 +18,7 @@ export default function ProtectedContent({
   const [decryptedText, setDecryptedText] = useState<string | null>(null);
   const [error, setError] = useState(false);
 
-  const handleDecrypt = (e: React.FormEvent) => {
+  const handleDecrypt = (e: React.SubmitEvent) => {
     e.preventDefault();
     setError(false);
 
@@ -33,24 +32,20 @@ export default function ProtectedContent({
     }
   };
 
-  // اگر رمزگشایی موفق بود، کامپوننت نمایش متن را رندر کن
   if (decryptedText !== null) {
     return <ContentViewer content={decryptedText} createdAt={createdAt} />;
   }
 
-  // در غیر این صورت فرم رمز عبور را نمایش بده
   return (
-    <div className="w-full max-w-md animate-in fade-in slide-in-from-bottom-8 duration-700">
-      <div className="bg-white border border-gray-200 rounded-3xl p-8 shadow-xl shadow-gray-200/40 text-center">
+    <div className="w-full max-w-md animate-in fade-in slide-in-from-bottom-6 duration-700">
+      <div className="bg-white border border-gray-200 rounded-3xl p-4 md:p-8 shadow-xl shadow-gray-200/40 text-center">
         <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gray-50 mb-6 border border-gray-100">
           <Lock className="w-7 h-7 text-gray-600" />
         </div>
 
-        <h2 className="text-xl font-bold text-gray-900 mb-2">
-          محتوای محافظت شده
-        </h2>
-        <p className="text-gray-500 mb-8 text-sm leading-relaxed">
-          فرستنده برای این متن رمز عبور تعیین کرده است.
+        <h2 className="text-xl font-bold mb-2">محتوای محافظت شده</h2>
+        <p className="opacity-50 mb-8 text-sm leading-relaxed">
+          نویسنده برای این متن رمز عبور تعیین کرده است.
         </p>
 
         <form onSubmit={handleDecrypt} className="space-y-4">
@@ -78,7 +73,7 @@ export default function ProtectedContent({
           <button
             type="submit"
             disabled={!password.trim()}
-            className="w-full bg-black hover:bg-gray-800 text-white font-medium py-3.5 px-6 rounded-xl transition-all transform active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-gray-200"
+            className="w-full bg-black hover:bg-gray-800 text-white font-medium py-3.5 px-6 rounded-xl transition-all transform active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed border"
           >
             گشایش و مشاهده متن
           </button>

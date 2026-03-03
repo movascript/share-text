@@ -4,7 +4,7 @@ const Footer = () => {
   return (
     <footer className="border-t border-gray-200 pt-8 text-center space-y-6">
       <a
-        href="https://github.com/your-username/sharetext"
+        href="https://github.com/movascript/share-text"
         target="_blank"
         rel="noopener noreferrer"
         className="group inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white border border-gray-200 text-gray-600 text-sm hover:bg-black hover:text-white hover:border-black transition-all duration-300 shadow-sm"

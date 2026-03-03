@@ -3,7 +3,7 @@ import { FileQuestion, ArrowLeft } from "lucide-react";
 
 export default function NotFound() {
   return (
-    <div className="flex flex-col items-center justify-center min-h-[70vh] animate-in fade-in zoom-in duration-500">
+    <div className="flex flex-col items-center justify-center min-h-[70vh] animate-in fade-in-30 zoom-in-80 duration-500">
       <div className="bg-white border border-gray-200 rounded-3xl p-8 md:p-12 shadow-sm hover:shadow-md transition-shadow duration-300 text-center max-w-md w-full">
         <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gray-50 mb-6 border border-gray-100">
           <FileQuestion className="w-10 h-10 text-gray-400" />
