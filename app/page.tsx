@@ -3,15 +3,10 @@
 import { useState } from "react";
 import { createPostAction } from "./actions";
 import { encryptData } from "@/lib/crypto";
-import {
-  Lock,
-  Clock,
-  Send,
-  Github,
-  ShieldCheck,
-  Zap,
-  EyeOff,
-} from "lucide-react";
+import { Lock, Clock, Send } from "lucide-react";
+import DetailsFeatures from "@/components/DetailsFeatures";
+import Footer from "@/components/Footer";
+import Header from "@/components/Header";
 
 export default function Home() {
   const [text, setText] = useState("");
@@ -19,30 +14,20 @@ export default function Home() {
   const [expiry, setExpiry] = useState("24h");
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.SubmitEvent) => {
     e.preventDefault();
     if (!text) return alert("لطفا متنی برای اشتراک گذاری بنویسید.");
 
     setLoading(true);
 
-    try {
-      const content = encryptData(text, password);
-      await createPostAction(content, expiry, !!password);
-    } catch (error) {
-      console.error("Error creating post:", error);
-      alert("خطایی رخ داد. لطفا مجدد تلاش کنید.");
-      setLoading(false);
-    }
+    const content = encryptData(text, password);
+    createPostAction(content, expiry, !!password);
   };
 
   return (
-    <main className="min-h-screen py-8 md:px-4 md:py-12 animate-in fade-in duration-700">
+    <main className="min-h-screen py-8 md:px-4 md:py-12 animate-in fade-in slide-in-from-top-2 duration-700">
       <div className="max-w-3xl mx-auto space-y-8">
-        <header className="text-center">
-          <h1 className="text-3xl font-bold md:font-extrabold tracking-tight text-gray-800">
-            اشتراک‌گذاری متن
-          </h1>
-        </header>
+        <Header />
 
         <form
           onSubmit={handleSubmit}
@@ -106,7 +91,6 @@ export default function Home() {
                   <option value="24h">۲۴ ساعت</option>
                   <option value="1w">۱ هفته</option>
                   <option value="1y">۱ سال</option>
-                  <option value="never">همیشگی</option>
                 </select>
                 <div className="absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none text-gray-400 text-xs">
                   ▼
@@ -135,72 +119,9 @@ export default function Home() {
           </button>
         </form>
 
-        {/* --- بخش ۲: اطلاعات و ویژگی‌ها --- */}
-        <section className="space-y-8">
-          <div className="text-center space-y-2">
-            <h2 className="text-2xl font-bold text-gray-800">
-              ساده، سریع و امن.
-            </h2>
-            <p className="text-gray-500 max-w-md mx-auto leading-relaxed">
-              ابزاری برای اشتراک‌گذاری متن بدون ثبت‌نام، با تمرکز کامل بر حفظ
-              حریم خصوصی شما.
-            </p>
-          </div>
+        <DetailsFeatures />
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {/* Feature 1 */}
-            <div className="bg-white/50 backdrop-blur border border-gray-100 p-6 rounded-2xl space-y-3 hover:bg-white transition-colors">
-              <div className="w-10 h-10 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center">
-                <ShieldCheck className="w-5 h-5" />
-              </div>
-              <h3 className="font-bold text-gray-800">رمزنگاری سمت کاربر</h3>
-              <p className="text-xs text-gray-500 leading-5">
-                اگر رمز عبور تعیین کنید، متن در مرورگر شما رمز شده و سپس ارسال
-                می‌شود. سرور هرگز متن اصلی را نمی‌بیند.
-              </p>
-            </div>
-
-            {/* Feature 2 */}
-            <div className="bg-white/50 backdrop-blur border border-gray-100 p-6 rounded-2xl space-y-3 hover:bg-white transition-colors">
-              <div className="w-10 h-10 bg-orange-50 text-orange-600 rounded-full flex items-center justify-center">
-                <Zap className="w-5 h-5" />
-              </div>
-              <h3 className="font-bold text-gray-800">سریع و بدون لاگین</h3>
-              <p className="text-xs text-gray-500 leading-5">
-                هیچ نیازی به ساخت اکانت نیست. متن را بنویسید، لینک را کپی کنید و
-                تمام.
-              </p>
-            </div>
-
-            {/* Feature 3 */}
-            <div className="bg-white/50 backdrop-blur border border-gray-100 p-6 rounded-2xl space-y-3 hover:bg-white transition-colors">
-              <div className="w-10 h-10 bg-red-50 text-red-600 rounded-full flex items-center justify-center">
-                <EyeOff className="w-5 h-5" />
-              </div>
-              <h3 className="font-bold text-gray-800">حذف زمان‌دار</h3>
-              <p className="text-xs text-gray-500 leading-5">
-                حذف خودکار و کامل اطلاعات از دیتابیس پس از سپری شدن مدت زمان
-                تعیین شده توسط شما.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        <footer className="border-t border-gray-200 pt-8 text-center space-y-6">
-          <a
-            href="https://github.com/your-username/sharetext"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white border border-gray-200 text-gray-600 text-sm hover:bg-black hover:text-white hover:border-black transition-all duration-300 shadow-sm"
-          >
-            <Github className="w-4 h-4 transition-transform group-hover:scale-110" />
-            <span>مشاهده سورس کد در گیت‌هاب</span>
-          </a>
-
-          <p className="text-gray-400 text-xs font-mono">
-            ShareText &copy; {new Date().getFullYear()}
-          </p>
-        </footer>
+        <Footer />
       </div>
     </main>
   );

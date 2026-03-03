@@ -25,6 +25,7 @@ export const decryptData = (
 
     return originalText || null;
   } catch (_) {
+    // wrong pass or error
     return null;
   }
 };
