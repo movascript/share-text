@@ -1,6 +1,6 @@
 import AES from "crypto-js/aes";
 import encUtf8 from "crypto-js/enc-utf8";
-
+// todo: should be updated to use the native window.crypto
 export const encryptData = (text: string, pass?: string): string => {
   if (!text) return "";
 

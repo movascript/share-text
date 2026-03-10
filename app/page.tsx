@@ -109,8 +109,10 @@ export default function Home() {
               <Loading />
             ) : (
               <>
-                <span>ایجاد لینک اشتراک</span>
-                <Send className="w-4 h-4 group-hover:-translate-x-1 transition-transform -rotate-90" />
+                <span className="group-hover:translate-x-0.5 transition-transform">
+                  ایجاد لینک اشتراک
+                </span>
+                <Send className="w-4 h-4 group-hover:-translate-x-0.5 transition-transform -rotate-90" />
               </>
             )}
           </button>

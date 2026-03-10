@@ -13,7 +13,7 @@ const DetailsFeatures = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {/* Feature 1 */}
-        <div className="bg-white/50 backdrop-blur border border-gray-100 p-6 rounded-2xl space-y-3 hover:bg-white transition-colors">
+        <div className="bg-white/50 backdrop-blur border border-gray-100 p-6 rounded-2xl space-y-3 hover:bg-white hover:-translate-y-1 hover:shadow-md transition-all">
           <div className="w-10 h-10 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center">
             <ShieldCheck className="w-5 h-5" />
           </div>
@@ -25,7 +25,7 @@ const DetailsFeatures = () => {
         </div>
 
         {/* Feature 2 */}
-        <div className="bg-white/50 backdrop-blur border border-gray-100 p-6 rounded-2xl space-y-3 hover:bg-white transition-colors">
+        <div className="bg-white/50 backdrop-blur border border-gray-100 p-6 rounded-2xl space-y-3 hover:bg-white hover:-translate-y-1 hover:shadow-md transition-all">
           <div className="w-10 h-10 bg-orange-50 text-orange-600 rounded-full flex items-center justify-center">
             <Zap className="w-5 h-5" />
           </div>
@@ -37,7 +37,7 @@ const DetailsFeatures = () => {
         </div>
 
         {/* Feature 3 */}
-        <div className="bg-white/50 backdrop-blur border border-gray-100 p-6 rounded-2xl space-y-3 hover:bg-white transition-colors">
+        <div className="bg-white/50 backdrop-blur border border-gray-100 p-6 rounded-2xl space-y-3 hover:bg-white hover:-translate-y-1 hover:shadow-md transition-all">
           <div className="w-10 h-10 bg-red-50 text-red-600 rounded-full flex items-center justify-center">
             <EyeOff className="w-5 h-5" />
           </div>
