@@ -1,36 +1,52 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ShareText
 
-## Getting Started
+Minimal encrypted text sharing platform for creating temporary private links without authentication.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- Create temporary text shares via unique links
+- Optional password-protected encrypted content
+- Client-side encryption and decryption
+- Automatic expiration and cleanup
+- Authentication-free minimal flow
+- Server Actions-based architecture (no manual API calls)
+- Lightweight and fast UX
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Screenshots
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+<img src="screenshots/screenshot-1.png" alt="Screenshot-1" width="600"/>
+<img src="screenshots/screenshot-2.png" alt="Screenshot-2" width="600"/>
+<img src="screenshots/screenshot-3.png" alt="Screenshot-3" width="600"/>
+<img src="screenshots/screenshot-4.png" alt="Screenshot-4" width="600"/>
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Overview
 
-## Learn More
+ShareText allows users to securely share text without accounts or setup. Everything is designed around instant creation and minimal friction.
 
-To learn more about Next.js, take a look at the following resources:
+Content is encrypted in the browser before being sent to the server, ensuring that the backend never stores readable data.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Architecture
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Client-Side Encryption
 
-## Deploy on Vercel
+All sensitive content is encrypted in the browser before upload. The server only stores encrypted payloads.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Server Actions (Next.js)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Uses Next.js Server Actions instead of traditional API routes, removing the need for manual fetch layers and simplifying data flow.
+
+### Temporary Storage System
+
+Shared content can expire automatically after a set time, enabling lightweight and disposable sharing.
+
+## Tech Stack
+
+- Next.js
+- React
+- TypeScript
+- Drizzle ORM
+- PostgreSQL
+- Tailwind CSS
+- Docker
+- Biome
+- React Compiler
